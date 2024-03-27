@@ -16,8 +16,11 @@ jobs:
       - name: Deploy to minikube
         run: |
           kubectl apply -f deployment.yml
+          kubectl apply -f service.yaml
       - name: Get resources in the namespace
-        run: kubectl get all  
+        run: |
+          kubectl get pods -A
+          kubectl get svc -A  
       
       - name: Get Cluster IP
         run: |
@@ -25,6 +28,6 @@ jobs:
          echo "Node IP: $NODE_IP"
         
       - name: Curl 
-        run: |
-          curl http://$NODE_IP:30001/todoitems
+        run:  |
+         curl $NODE_IP:30001/todoitems
           
