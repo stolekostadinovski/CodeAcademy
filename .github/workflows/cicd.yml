@@ -22,12 +22,7 @@ jobs:
           kubectl get pods -A
           kubectl get svc -A  
       
-      - name: Get Cluster IP
-        run: |
-         NODE_IP=$(kubectl get nodes -o wide | awk 'NR==2 {print $6}')
-         echo "Node IP: $NODE_IP"
-        
       - name: Curl 
-        run:  |
-         curl "$NODE_IP:30001/todoitems"
+        run: |
+          curl "$(kubectl get nodes -o wide | awk 'NR==2 {print $6}'):30001/todoitems"
           
