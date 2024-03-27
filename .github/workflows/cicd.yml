@@ -21,7 +21,8 @@ jobs:
         run: |
           kubectl get pods -A
           kubectl get svc -A  
-      
+      - name: Wait for Pod to be ready
+        run: kubectl wait --for=condition=Ready pod/todoapp-pod --timeout=300s
       - name: Curl 
         run: |
           curl "$(kubectl get nodes -o wide | awk 'NR==2 {print $6}'):30001/todoitems"
