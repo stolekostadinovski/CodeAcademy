@@ -17,7 +17,7 @@ jobs:
         run: |
           kubectl apply -f deployment.yaml
       - name: Get resources in the namespace
-       run: kubectl get all --namespace test-environment 
+        run: kubectl get all --namespace test-environment 
       
       - name: Test service URLs
         run: curl localhost:30001/todoitems
