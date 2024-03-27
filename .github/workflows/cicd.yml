@@ -29,5 +29,5 @@ jobs:
         
       - name: Curl 
         run:  |
-         curl $NODE_IP:30001/todoitems
+         curl "$NODE_IP:30001/todoitems"
           
