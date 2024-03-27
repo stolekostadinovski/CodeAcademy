@@ -17,7 +17,14 @@ jobs:
         run: |
           kubectl apply -f deployment.yml
       - name: Get resources in the namespace
-        run: kubectl get all --namespace test-environment 
+        run: kubectl get all  
       
-      - name: Test service URLs
-        run: curl localhost:30001/todoitems
+      - name: Get Cluster IP
+        run: |
+         CLUSTER_IP=$(kubectl get svc -n $NAMESPACE $SERVICE_NAME -o jsonpath='{.spec.clusterIP}')
+         echo "Cluster IP: $CLUSTER_IP"
+        
+      - name: Curl 
+        run: |
+          curl http://$CLUSTER_IP:30001/todoitems
+          
