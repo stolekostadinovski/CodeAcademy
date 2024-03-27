@@ -21,10 +21,10 @@ jobs:
       
       - name: Get Cluster IP
         run: |
-         CLUSTER_IP=$(kubectl get svc -n $NAMESPACE $SERVICE_NAME -o jsonpath='{.spec.clusterIP}')
-         echo "Cluster IP: $CLUSTER_IP"
+         NODE_IP=$(kubectl get nodes -o wide | awk 'NR==2 {print $6}')
+         echo "Node IP: $NODE_IP"
         
       - name: Curl 
         run: |
-          curl http://$CLUSTER_IP:30001/todoitems
+          curl http://$NODE_IP:30001/todoitems
           
