@@ -16,7 +16,7 @@ jobs:
       - name: Deploy to minikube
         run: |
           kubectl apply -f deployment.yaml
-      -name: Get resources in the namespace
+      - name: Get resources in the namespace
        run: kubectl get all --namespace test-environment 
       
       - name: Test service URLs
